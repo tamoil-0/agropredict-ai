@@ -39,7 +39,7 @@
 
 /* Tooltip intuitivo */
 .leaflet-draw-draw-polygon::after {
-  content: "Haz clic para dibujar 🌿";
+  content: "Click to draw 🌿";
   position: absolute;
   white-space: nowrap;
   left: 55px;
@@ -99,7 +99,7 @@
 
 /* === Etiqueta flotante para inputs incompletos === */
 .pulse-required::after {
-  content: "📅 Selecciona la fecha para continuar";
+  content: "📅 Select the date to continue";
   position: absolute;
   top: 105%;
   left: 0;

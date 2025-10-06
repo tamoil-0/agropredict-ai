@@ -661,7 +661,7 @@ setPhase(estado);
       : "bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600"
   }`}
 >
-  {drawingMode ? "🛑 Finalizar dibujo" : "✏️ Dibujar área"}
+  {drawingMode ? "🛑 Finish drawing" : "✏️ Draw area"}
 </button>
 
             </div>
@@ -860,7 +860,7 @@ setPhase(estado);
 
       {/* SUGERENCIAS RÁPIDAS */}
       <div className="flex flex-wrap gap-2 px-4 pb-2 text-xs">
-        {["¿Cuál cultivo florece mejor hoy?", "Dame un resumen climático", "¿Qué hacer si hay baja humedad?"].map(
+        {["Which crop is flowering best today?“, ”Give me a weather summary,“ ”What should I do if humidity is low?"].map(
           (sug, i) => (
             <button
               key={i}
