@@ -197,42 +197,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* === PIE DE PÁGINA MEJORADO === */}
-    <footer className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white text-center py-6 md:py-8 mt-auto relative overflow-hidden">
+    {/* === PIE DE PÁGINA MEJORADO === */}
+<footer className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white text-center py-10 mt-auto relative overflow-hidden">
+  <div className="absolute inset-0 bg-[url('/img/grid-pattern.svg')] opacity-10"></div>
 
-        <div className="absolute inset-0 bg-[url('/img/grid-pattern.svg')] opacity-10"></div>
-        
-        <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg animate-scale-in">
-            <span className="text-2xl">🌱</span>
-          </div>
-          
-          <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
-            AgroPredict AI
-          </h3>
-          
-          <p className="text-blue-100/80 text-lg leading-relaxed max-w-2xl mx-auto mb-6">
-                Transforming agriculture with space technology and artificial intelligence 
-for a more sustainable and productive future.
-          </p>
-          
-          <div className="flex justify-center gap-6 mb-6">
-            {['🚀', '📡', '🌍', '🤖'].map((icon, index) => (
-              <div
-                key={icon}
-                className="text-2xl hover:scale-125 hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
-              >
-                {icon}
-              </div>
-            ))}
-          </div>
-          
-          <p className="text-sm text-blue-200/60 tracking-wide">
-            © 2025 <strong className="text-white">AgroPredict AI</strong> — 
-            Cultivating innovation, harvesting the future 🌟
-          </p>
+  <div className="max-w-5xl mx-auto px-6 relative z-10">
+    {/* ICONO NASA */}
+    <div className="flex justify-center items-center gap-4 mb-6">
+      <img
+        src="/img/nasa.png"
+        alt="NASA Space Apps Challenge"
+        className="w-16 h-16 rounded-lg shadow-lg border border-blue-300 bg-white/10"
+      />
+      <h3 className="text-2xl md:text-3xl font-bold text-blue-100 tracking-wide">
+        PARTICIPANTES — NASA International Space Apps Challenge 🚀
+      </h3>
+    </div>
+
+    {/* LISTA DE INTEGRANTES */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-lg text-blue-100/90 mb-8 font-medium">
+      <p><span className="text-emerald-400 font-semibold">🌟 Integrante #0:</span> Yanela Roxana Cojal Rodríguez</p>
+      <p><span className="text-emerald-400 font-semibold">👨‍💻 Integrante #1:</span> Jhon Marco Aracayo Mamani</p>
+      <p><span className="text-emerald-400 font-semibold">👩‍💻 Integrante #2:</span> Angie Tatiana Luque Pacheco</p>
+      <p><span className="text-emerald-400 font-semibold">🛰️ Integrante #3:</span> Ector Adrian Rivadeneyra Cardenas</p>
+      <p><span className="text-emerald-400 font-semibold">🔬 Integrante #4:</span> Elver Joel Sandoval Salinas</p>
+      <p><span className="text-emerald-400 font-semibold">🧠 Integrante #5:</span> Lindsay Eliana Heredia Acosta</p>
+    </div>
+
+    {/* DESCRIPCIÓN */}
+    <p className="text-blue-100/80 text-md leading-relaxed max-w-3xl mx-auto mb-6">
+      <strong className="text-emerald-400">AgroPredict AI</strong> — desarrollado para el 
+      <span className="text-blue-300"> NASA Space Apps Challenge 2025</span>, 
+      combines artificial intelligence, satellite data, and IoT technology 🌾 to boost agricultural productivity 
+      and environmental sustainability in Peru 🇵🇪.
+    </p>
+
+    {/* ICONOS */}
+    <div className="flex justify-center gap-6 mb-6">
+      {['🚀', '📡', '🌍', '🤖'].map((icon) => (
+        <div
+          key={icon}
+          className="text-3xl hover:scale-125 hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
+        >
+          {icon}
         </div>
-      </footer>
+      ))}
+    </div>
+
+    {/* COPYRIGHT */}
+    <p className="text-sm text-blue-200/60 tracking-wide">
+      © 2025 <strong className="text-white">AgroPredict AI</strong> — 
+      Cultivating innovation, harvesting the future 🌟
+    </p>
+  </div>
+</footer>
+
 
       {/* Estilos de animación personalizados */}
       <style jsx>{`
