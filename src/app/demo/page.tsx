@@ -654,14 +654,16 @@ setPhase(estado);
                 {Object.keys(regiones).map((r) => <option key={r}>{r}</option>)}
               </select>
               <button
-                onClick={() => setDrawingMode(!drawingMode)}
-                className={`px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
-                  drawingMode ? "bg-red-500" : "bg-blue-500"
-                } text-white`}
-              >
-               {drawingMode ? "🛑 Disable" : "✏️ Draw Area"}
+  onClick={() => setDrawingMode(!drawingMode)}
+  className={`px-4 py-2 rounded-xl font-semibold text-white shadow-md transition-all flex items-center gap-2 ${
+    drawingMode
+      ? "bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700"
+      : "bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-600 hover:to-emerald-600"
+  }`}
+>
+  {drawingMode ? "🛑 Finalizar dibujo" : "✏️ Dibujar área"}
+</button>
 
-              </button>
             </div>
           </div>
 
@@ -742,15 +744,17 @@ setPhase(estado);
               >
                 {cultivosRegion.map((c) => <option key={c}>{c}</option>)}
               </select>
-<div className="mt-5 w-full text-center">
-  <label className="block text-sm font-semibold text-slate-700 mb-1">📅 Campaign Start Date:</label>
+<div className="relative w-full flex flex-col items-center">
   <input
     type="date"
     value={fechaSiembra}
     onChange={(e) => setFechaSiembra(e.target.value)}
-    className="border border-amber-300 rounded-lg px-3 py-2 text-slate-700 shadow-sm focus:ring-2 focus:ring-amber-400"
+    className={`border-2 rounded-lg px-4 py-2 text-slate-700 shadow-inner focus:ring-2 focus:ring-amber-400 transition-all duration-500 w-60 text-center ${
+      !fechaSiembra ? "pulse-required" : "border-emerald-400 bg-white"
+    }`}
   />
 </div>
+
 {fechaSiembra && (
   <div className="mt-5 w-full bg-gradient-to-br from-amber-50 to-emerald-50 rounded-xl border border-amber-300 shadow-md p-5 text-center">
     <h3 className="text-xl font-bold bg-gradient-to-r from-amber-600 to-green-600 bg-clip-text text-transparent mb-2">
