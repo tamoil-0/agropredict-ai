@@ -58,19 +58,7 @@ export default function Home() {
         </div>
 
         {/* Navegación moderna */}
-        <nav className="hidden md:flex items-center gap-8">
-         {["Home", "Features", "Demo", "About Us"].map((item) => (
-  // tu contenido dentro del ma
-
-            <a
-              key={item}
-              href={`#${item.toLowerCase().replace(' ', '-')}`}
-              className="text-sm font-medium text-slate-700 hover:text-blue-600 transition-all duration-300 hover:-translate-y-0.5"
-            >
-              {item}
-            </a>
-          ))}
-        </nav>
+       
 
         {/* Botón CTA en header */}
        <a

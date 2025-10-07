@@ -761,7 +761,7 @@ setPhase(estado);
       🌼 Crop Development Summary
     </h3>
     <p className="text-lg text-amber-700 font-semibold mb-1">
-      🌡️ Accumulated GDD: <span className="text-emerald-600">{gddTotal.toFixed(1)} °C·day</span>
+      🌡️ Accumulated GDD: <span className="text-emerald-600">{gddTotal.toFixed(1)} day</span>
     </p>
     <p className="text-md text-green-700 font-semibold mb-3">
       📈 Current Stage: {etapa}
