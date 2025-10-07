@@ -446,6 +446,7 @@ const regiones: Record<string, { lat: number; lon: number }> = {
 
 useEffect(() => {
   if (!fechaSiembra || !cultivo) return;
+
   const info = parametrosCultivo[cultivo] || parametrosCultivo.default;
 
   const fechaInicio = new Date(fechaSiembra);
@@ -455,52 +456,61 @@ useEffect(() => {
   let acumulado = 0;
   const datosSimulados: { fecha: string; Tmax: number; Tmin: number; gdd: number; acumulado: number }[] = [];
 
-for (let i = 0; i < dias; i++) {
-  const fecha = dayjs(fechaInicio).add(i, "day");
-  
-  // 🔹 Temperaturas según región (más frío en Puno, más cálido en Piura)
-  const baseRegional =
-    regionSeleccionada === "Puno" ? 12 :
-    regionSeleccionada === "Cusco" ? 15 :
-    regionSeleccionada === "Piura" ? 26 :
-    regionSeleccionada === "LaLibertad" ? 22 :
-    20;
+  for (let i = 0; i < dias; i++) {
+    const fecha = dayjs(fechaInicio).add(i, "day");
 
-  const Tmax = baseRegional + Math.random() * 5; // ligera variación
-  const Tmin = baseRegional - (4 + Math.random() * 3);
+    // 🔹 Base regional diferenciada
+    const baseRegional =
+      regionSeleccionada === "Puno" ? 12 :
+      regionSeleccionada === "Cusco" ? 15 :
+      regionSeleccionada === "Piura" ? 26 :
+      regionSeleccionada === "LaLibertad" ? 22 :
+      20;
 
-  const GDD = Math.max(0, ((Tmax + Tmin) / 2) - info.Tbase);
-  acumulado += GDD;
+    const Tmax = baseRegional + Math.random() * 5;
+    const Tmin = baseRegional - (4 + Math.random() * 3);
 
-  datosSimulados.push({
-    fecha: fecha.format("YYYY-MM-DD"),
-    Tmax: parseFloat(Tmax.toFixed(1)),
-    Tmin: parseFloat(Tmin.toFixed(1)),
-    gdd: parseFloat(GDD.toFixed(2)),
-    acumulado: parseFloat(acumulado.toFixed(2)),
-  });
-}
+    const GDD = Math.max(0, ((Tmax + Tmin) / 2) - info.Tbase);
+    acumulado += GDD;
 
+    datosSimulados.push({
+      fecha: fecha.format("YYYY-MM-DD"),
+      Tmax: parseFloat(Tmax.toFixed(1)),
+      Tmin: parseFloat(Tmin.toFixed(1)),
+      gdd: parseFloat(GDD.toFixed(2)),
+      acumulado: parseFloat(acumulado.toFixed(2)),
+    });
+  }
 
   setHistorialGDD(datosSimulados);
   setGddTotal(acumulado);
 
-const etapas = etapasCultivo[cultivo] || etapasCultivo.default;
+  const etapas = etapasCultivo[cultivo] || etapasCultivo.default;
+  let etapaActual = etapas.find(e => acumulado >= e.min && acumulado <= e.max)?.stage;
+  const ultimaEtapa = etapas[etapas.length - 1];
 
-// Buscar etapa actual dentro de rango
-let etapaActual = etapas.find(e => acumulado >= e.min && acumulado <= e.max)?.stage;
+  if (acumulado > ultimaEtapa.max) etapaActual = "🌾 Harvest finished (Final stage)";
+  if (!etapaActual) etapaActual = "🌱 In Emergency";
 
-// 🔹 Si supera el máximo de la última etapa, mostrar “Harvest finished”
-const ultimaEtapa = etapas[etapas.length - 1];
-if (acumulado > ultimaEtapa.max) {
-  etapaActual = "🌾 Harvest finished (Final stage)";
-}
+  setEtapa(etapaActual);
 
-// Si no encuentra ninguna etapa, usar texto por defecto
-if (!etapaActual) etapaActual = "🌱 In Emergency";
+  // 🔁 Actualizamos datos del área si ya hay uno
+  if (areaData) {
+    const UC = ((datosSimulados.at(-1)?.gdd ?? 0) - info.Tbase).toFixed(2);
+    const nuevaFloracion =
+      acumulado < etapas[1].max ? "🌿 Early growth" :
+      acumulado < etapas[2].max ? "🌸 Flowering" :
+      acumulado < etapas[3].max ? "🌾 Maturity" :
+      "✅ Harvest";
+    setAreaData({
+      ...areaData,
+      cultivo,
+      UC,
+      floracion: nuevaFloracion,
+    });
+  }
+}, [fechaSiembra, cultivo, regionSeleccionada]); // 👈 Añadimos regionSeleccionada también
 
-setEtapa(etapaActual);
-}, [fechaSiembra, cultivo]);
 
   // === ICONO LEAFLET ===
   useEffect(() => {
@@ -761,7 +771,7 @@ setPhase(estado);
       🌼 Crop Development Summary
     </h3>
     <p className="text-lg text-amber-700 font-semibold mb-1">
-      🌡️ Accumulated GDD: <span className="text-emerald-600">{gddTotal.toFixed(1)} day</span>
+      🌡️ Accumulated GDD: <span className="text-emerald-600">{gddTotal.toFixed(1)}</span>
     </p>
     <p className="text-md text-green-700 font-semibold mb-3">
       📈 Current Stage: {etapa}
@@ -784,7 +794,7 @@ setPhase(estado);
 ) : (
   <div className="text-center space-y-3">
     <p className="text-lg text-slate-800 font-semibold">🌾 Crop: {areaData.cultivo}</p>
-    <p className="text-green-600 text-lg font-semibold">🔥 GDD: {areaData.UC} °C·day</p>
+    <p className="text-green-600 text-lg font-semibold">🔥 GDD: {areaData.UC}</p>
     <p className="text-slate-700">Tmax: {areaData.Tmax} °C — Tmin: {areaData.Tmin} °C</p>
     <p className="text-slate-700">NDVI: {areaData.ndvi}</p>
     <p className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-400 bg-clip-text text-transparent">{areaData.floracion}</p>
