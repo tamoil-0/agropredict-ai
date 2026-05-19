@@ -63,9 +63,9 @@ export default function Home() {
         {/* Botón CTA en header */}
        <a
   href="/demo"
-  className="px-8 py-4 bg-gradient-to-r from-blue-600 to-emerald-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 hover:scale-105 hover:-translate-y-0.5 active:scale-95"
+  className="px-8 py-3 bg-gradient-to-r from-blue-600 to-emerald-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 hover:scale-105 hover:-translate-y-0.5 active:scale-95"
 >
-  🚀 See Phenological Stage
+  🎯 Demo Interactivo
 </a>
 
       </header>
@@ -76,46 +76,44 @@ export default function Home() {
         {/* Columna izquierda: Contenido principal */}
         <div className="flex flex-col items-start justify-center space-y-8 relative">
        
-          {/* Título princpal con gradiente */}
+          {/* Títiulo principal con gradiente - Enfocado en feria */}
           <div className="animate-slide-up">
            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-snug md:leading-tight tracking-tight">
 
               <span className="bg-gradient-to-r from-blue-600 via-emerald-600 to-cyan-600 bg-clip-text text-transparent">
-                From the<br />
+                Sostenibilidad<br />
               </span>
               <span className="bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-                space,<br />
+                Agrícola<br />
               </span>
               <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
-                we cultivate<br />
-              </span>
-              <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                future
+                Mediante IA
               </span>
             </h1>
           </div>
 
-          {/* Descripción mejorada */}
-         <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-blue-50 max-w-md animate-fade-in-delayed">
+          {/* Descripción enfocada en la feria */}
+         <div className="bg-gradient-to-r from-blue-50 to-emerald-50 backdrop-blur-sm rounded-xl p-6 shadow-lg border-2 border-emerald-200 max-w-md animate-fade-in-delayed">
 
             <p className="text-lg text-slate-700 leading-relaxed">
               <strong className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
                 AgroPredict AI
-              </strong> combines artificial intelligence, satellite data, and IoT sensors 
-              to transform traditional agriculture into precision agriculture.
+              </strong> utiliza inteligencia artificial y datos satelitales para optimizar la producción agrícola reduciendo consumo de energía, agua y químicos. 
+              <span className="block mt-2 text-sm font-semibold text-emerald-700">⚡ Parte de la transición energética en Puno</span>
             </p>
           </div>
 
           {/* Estadísticas en tiempo real */}
-          <div className="flex flex-wrap gap-4 mt-2 animate-fade-in text-sm">
+          <div className="flex flex-wrap gap-6 mt-4 animate-fade-in text-sm">
 
             {[
-             { value: "99%", label: "Accuracy" },
-{ value: "24/7", label: "Monitoring" },
-{ value: "50%", label: "Less Water" }
+             { value: "30%", label: "Menos Agua", emoji: "💧" },
+{ value: "40%", label: "Menos Energía", emoji: "⚡" },
+{ value: "99%", label: "Precisión", emoji: "🎯" }
 
             ].map((stat, index) => (
-              <div key={stat.label} className="text-center">
+              <div key={stat.label} className="text-center bg-white/60 p-3 rounded-lg backdrop-blur">
+                <div className="text-3xl mb-1">{stat.emoji}</div>
                 <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
                   {stat.value}
                 </div>
@@ -185,7 +183,154 @@ export default function Home() {
         </div>
       </section>
 
-    {/* === PIE DE PÁGINA MEJORADO === */}
+      {/* === SECCIÓN DE CARACTERÍSTICAS === */}
+      <section className="w-full py-16 md:py-24 bg-gradient-to-b from-transparent to-blue-50/50 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 md:px-10">
+          
+          <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-16 bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
+            🌟 Características Principales
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: "🛰️",
+                title: "Datos Satelitales",
+                desc: "Imágenes de satélite en tiempo real para monitoreo preciso de cultivos"
+              },
+              {
+                icon: "🤖",
+                title: "IA Avanzada",
+                desc: "Machine Learning para predicciones de rendimiento con 99% precisión"
+              },
+              {
+                icon: "💧",
+                title: "Optimización Hídrica",
+                desc: "Reduce consumo de agua hasta 30% mediante riego inteligente"
+              },
+              {
+                icon: "⚡",
+                title: "Eficiencia Energética",
+                desc: "Compatible con paneles solares y sistemas de energía renovable"
+              },
+              {
+                icon: "📊",
+                title: "Dashboard Interactivo",
+                desc: "Visualización de datos agrícolas en tiempo real y predicciones futuras"
+              },
+              {
+                icon: "🌾",
+                title: "Sostenibilidad",
+                desc: "Reduce químicos y emisiones de carbono en la producción agrícola"
+              }
+            ].map((feature, idx) => (
+              <div key={idx} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-emerald-100">
+                <div className="text-5xl mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{feature.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* === SECCIÓN TRANSICIÓN ENERGÉTICA === */}
+      <section className="w-full py-16 md:py-24 bg-gradient-to-r from-emerald-50 to-blue-50 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 md:px-10">
+          
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
+              ♻️ Parte de la Transición Energética
+            </h2>
+            <p className="text-lg text-slate-600">Tecnología sostenible alineada con los objetivos del Titikaka Energético 2026</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            {/* Izquierda: Impacto Ambiental */}
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border-2 border-emerald-200">
+              <h3 className="text-2xl font-bold text-emerald-700 mb-6 flex items-center gap-2">
+                🌍 Impacto Ambiental
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  "30% menos uso de agua potable",
+                  "40% menor consumo energético",
+                  "25% reducción en químicos",
+                  "CO₂ reducido en transporte agrícola",
+                  "Suelos más saludables y productivos"
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-slate-700">
+                    <span className="text-2xl">✅</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Derecha: Beneficios Económicos */}
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-lg border-2 border-blue-200">
+              <h3 className="text-2xl font-bold text-blue-700 mb-6 flex items-center gap-2">
+                💰 Beneficios Económicos
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  "15-30% aumento en rendimiento de cultivos",
+                  "40% reducción en costos operacionales",
+                  "Decisiones basadas en datos reales",
+                  "Acceso a mercados de productos sostenibles",
+                  "ROI en 2 años promedio"
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-slate-700">
+                    <span className="text-2xl">💵</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+
+          {/* CTA Feria */}
+          <div className="mt-12 text-center">
+            <div className="inline-block bg-gradient-to-r from-emerald-600 to-blue-600 rounded-2xl p-1">
+              <div className="bg-white rounded-xl px-8 py-4 md:px-10 md:py-6">
+                <p className="text-lg font-semibold text-slate-800 mb-2">
+                  🎪 Visítanos en la Feria <span className="text-emerald-700">Titikaka Energético 2026</span>
+                </p>
+                <p className="text-slate-600">21 de mayo de 2026 | Universidad Nacional del Altiplano</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* === SECCIÓN CTA PRINCIPAL === */}
+      <section className="w-full py-16 md:py-20 bg-gradient-to-r from-blue-600 via-emerald-600 to-cyan-600 relative overflow-hidden z-10">
+        
+        {/* Fondo decorativo */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 md:px-10 text-center relative z-10">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6">
+            🚀 ¡Prueba la Plataforma Ahora!
+          </h2>
+          <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+            Accede a nuestro demo interactivo y descubre cómo AgroPredict AI puede optimizar tu producción agrícola de forma sostenible.
+          </p>
+          <a
+            href="/demo"
+            className="inline-block px-10 py-4 bg-white text-blue-600 font-bold text-lg rounded-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 active:scale-95"
+          >
+            Ir al Demo Interactivo →
+          </a>
+        </div>
+      </section>
+
+      {/* === PIE DE PÁGINA MEJORADO === */}
 <footer className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white text-center py-10 mt-auto relative overflow-hidden">
   <div className="absolute inset-0 bg-[url('/img/grid-pattern.svg')] opacity-10"></div>
 

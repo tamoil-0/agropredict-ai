@@ -1,11 +1,367 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import dynamic from "next/dynamic";
-import "leaflet-draw/dist/leaflet.draw.css";
-import { useRouter } from "next/navigation";
-import dayjs from "dayjs";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+
+export default function DemoPage() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Estados del formulario
+  const [cultivo, setCultivo] = useState("Corn (Maize)");
+  const [temperatura, setTemperatura] = useState(22);
+  const [humedad, setHumedad] = useState(65);
+  const [diasSiembra, setDiasSiembra] = useState(120);
+  const [resultados, setResultados] = useState<any>(null);
+
+  const cultivos = [
+    "Corn (Maize)",
+    "Wheat (Bread)",
+    "Rice",
+    "Potato",
+    "Tomato",
+    "Bean",
+    "Soybean",
+    "Lettuce",
+    "Onion",
+    "Sunflower",
+  ];
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const calcularPrediccion = () => {
+    // Simulación de predicción basada en inputs
+    const etapas: { [key: string]: string[] } = {
+      "Corn (Maize)": [
+        "🌱 Emergence (0-100 días GDD)",
+        "🌿 Vegetative (100-250 días GDD)",
+        "🌸 Flowering (250-600 días GDD)",
+        "🌾 Harvest Ready (600+ días GDD)",
+      ],
+      "Wheat (Bread)": [
+        "🌱 Emergence (0-120 días GDD)",
+        "🌿 Vegetative (120-300 días GDD)",
+        "🌸 Flowering (300-700 días GDD)",
+        "🌾 Harvest Ready (700+ días GDD)",
+      ],
+      "Potato": [
+        "🌱 Emergence (0-120 días GDD)",
+        "🌿 Tuberization (120-300 días GDD)",
+        "🌸 Bulking (300-500 días GDD)",
+        "🥔 Harvest Ready (500+ días GDD)",
+      ],
+      "Tomato": [
+        "🌱 Seedling (0-100 días GDD)",
+        "🌿 Vegetative (100-250 días GDD)",
+        "🌸 Flowering (250-600 días GDD)",
+        "🍅 Fruit Ripening (600+ días GDD)",
+      ],
+      default: [
+        "🌱 Early Stage (0-150 días GDD)",
+        "🌿 Vegetative (150-450 días GDD)",
+        "🌸 Reproductive (450-900 días GDD)",
+        "🌾 Harvest Ready (900+ días GDD)",
+      ],
+    };
+
+    // Calcular GDD (Growing Degree Days)
+    const gddDiario = Math.max(0, (temperatura - 10) * 1.2);
+    const gddTotal = gddDiario * (diasSiembra / 30);
+
+    // Determinar etapa
+    let etapa = "🌱 Early Growth Stage";
+    const etapasDelCultivo = etapas[cultivo] || etapas.default;
+
+    if (gddTotal < 150) etapa = etapasDelCultivo[0];
+    else if (gddTotal < 450) etapa = etapasDelCultivo[1];
+    else if (gddTotal < 900) etapa = etapasDelCultivo[2];
+    else etapa = etapasDelCultivo[3];
+
+    // Calcular predicción de rendimiento
+    const rendimientoBase = 100;
+    const rendimientoTemp =
+      temperatura >= 15 && temperatura <= 30
+        ? rendimientoBase
+        : temperatura < 15
+          ? rendimientoBase * 0.7
+          : rendimientoBase * 0.6;
+    const rendimientoHum =
+      humedad >= 40 && humedad <= 80
+        ? rendimientoTemp
+        : rendimientoTemp * 0.8;
+    const rendimiento = Math.round(rendimientoHum);
+
+    // Beneficios de agua y energía
+    const ahorroAgua = Math.round(30 * (temperatura / 25));
+    const ahorroEnergia = Math.round(40 * (humedad / 100));
+
+    setResultados({
+      gddTotal: Math.round(gddTotal),
+      etapa,
+      rendimiento,
+      ahorroAgua,
+      ahorroEnergia,
+      saludCultivo:
+        rendimiento > 85
+          ? "🟢 Excelente"
+          : rendimiento > 70
+            ? "🟡 Buena"
+            : "🔴 Necesita atención",
+    });
+  };
+
+  // Llamar automáticamente a calcular cuando cambien los inputs
+  useEffect(() => {
+    if (isMounted) {
+      calcularPrediccion();
+    }
+  }, [cultivo, temperatura, humedad, diasSiembra, isMounted]);
+
+  if (!isMounted) {
+    return (
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50 flex items-center justify-center">
+        <div className="text-2xl font-bold text-slate-700">Cargando...</div>
+      </main>
+    );
+  }
+
+  return (
+    <main className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50 text-[#0F2A43] font-sans relative">
+      
+      {/* Fondo decorativo */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-200/20 to-cyan-200/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-emerald-200/20 to-green-200/20 rounded-full blur-3xl animate-pulse"></div>
+      </div>
+
+      {/* Header */}
+      <header className="flex items-center justify-between px-6 md:px-16 py-4 backdrop-blur-md border-b bg-white/90 border-blue-100/50 shadow-lg sticky top-0 z-50 relative">
+        <Link href="/" className="flex items-center gap-3 group cursor-pointer">
+          <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
+            🌾 AgroPredict
+          </span>
+        </Link>
+        <a
+          href="/"
+          className="px-6 py-2 bg-gray-200 text-slate-700 rounded-lg font-semibold hover:bg-gray-300 transition-all"
+        >
+          ← Volver
+        </a>
+      </header>
+
+      {/* CONTENIDO PRINCIPAL */}
+      <section className="flex-1 max-w-7xl mx-auto w-full px-4 md:px-10 py-8 md:py-12 relative z-10">
+        
+        {/* Título */}
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
+            🔬 Demo Interactivo de Predicción
+          </h1>
+          <p className="text-lg text-slate-600">Ajusta los parámetros y observa las predicciones en tiempo real</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* === PANEL DE CONTROL === */}
+          <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-xl border-2 border-blue-100">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">⚙️ Parámetros del Cultivo</h2>
+
+            {/* Selector de Cultivo */}
+            <div className="mb-6">
+              <label className="block text-sm font-semibold text-slate-700 mb-2">
+                🌱 Selecciona el Cultivo
+              </label>
+              <select
+                value={cultivo}
+                onChange={(e) => setCultivo(e.target.value)}
+                className="w-full px-4 py-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:border-blue-500 font-medium text-slate-800"
+              >
+                {cultivos.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Temperatura */}
+            <div className="mb-6">
+              <label className="block text-sm font-semibold text-slate-700 mb-2">
+                🌡️ Temperatura Promedio: {temperatura}°C
+              </label>
+              <input
+                type="range"
+                min="10"
+                max="35"
+                value={temperatura}
+                onChange={(e) => setTemperatura(Number(e.target.value))}
+                className="w-full h-3 bg-gradient-to-r from-blue-300 to-emerald-300 rounded-lg cursor-pointer"
+              />
+              <div className="flex justify-between text-xs text-slate-600 mt-2">
+                <span>10°C</span>
+                <span>22.5°C (Óptima)</span>
+                <span>35°C</span>
+              </div>
+            </div>
+
+            {/* Humedad */}
+            <div className="mb-6">
+              <label className="block text-sm font-semibold text-slate-700 mb-2">
+                💧 Humedad Relativa: {humedad}%
+              </label>
+              <input
+                type="range"
+                min="20"
+                max="100"
+                value={humedad}
+                onChange={(e) => setHumedad(Number(e.target.value))}
+                className="w-full h-3 bg-gradient-to-r from-cyan-300 to-blue-300 rounded-lg cursor-pointer"
+              />
+              <div className="flex justify-between text-xs text-slate-600 mt-2">
+                <span>20%</span>
+                <span>60% (Óptima)</span>
+                <span>100%</span>
+              </div>
+            </div>
+
+            {/* Días desde siembra */}
+            <div className="mb-6">
+              <label className="block text-sm font-semibold text-slate-700 mb-2">
+                📅 Días desde Siembra: {diasSiembra} días
+              </label>
+              <input
+                type="range"
+                min="0"
+                max="200"
+                value={diasSiembra}
+                onChange={(e) => setDiasSiembra(Number(e.target.value))}
+                className="w-full h-3 bg-gradient-to-r from-emerald-300 to-green-300 rounded-lg cursor-pointer"
+              />
+              <div className="flex justify-between text-xs text-slate-600 mt-2">
+                <span>0 días</span>
+                <span>100 días</span>
+                <span>200 días</span>
+              </div>
+            </div>
+
+            {/* Nota */}
+            <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded">
+              <p className="text-sm text-emerald-800">
+                💡 <strong>Ajusta los parámetros en tiempo real</strong> para ver cómo cambian las predicciones instantáneamente.
+              </p>
+            </div>
+          </div>
+
+          {/* === RESULTADOS === */}
+          <div>
+            
+            {/* Card 1: Etapa del Cultivo */}
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 shadow-lg border-2 border-blue-200 mb-6">
+              <h3 className="text-xl font-bold text-slate-900 mb-4">🌾 Etapa Fenológica Actual</h3>
+              <div className="text-4xl font-extrabold text-blue-600 mb-2">{resultados?.etapa}</div>
+              <p className="text-slate-600 text-sm">
+                La etapa fenológica determina qué necesita el cultivo en este momento del ciclo.
+              </p>
+              <div className="mt-4 p-3 bg-white rounded-lg">
+                <p className="text-sm font-semibold text-slate-800">
+                  📈 GDD Acumulado: <span className="text-blue-600">{resultados?.gddTotal}</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Card 2: Salud del Cultivo */}
+            <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-3xl p-8 shadow-lg border-2 border-emerald-200 mb-6">
+              <h3 className="text-xl font-bold text-slate-900 mb-4">💚 Salud del Cultivo</h3>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-lg font-semibold text-slate-700">Rendimiento Esperado:</span>
+                <span className="text-3xl font-bold text-emerald-600">{resultados?.rendimiento}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
+                <div
+                  className="bg-gradient-to-r from-emerald-400 to-green-500 h-4 rounded-full transition-all duration-500"
+                  style={{ width: `${resultados?.rendimiento}%` }}
+                ></div>
+              </div>
+              <div className="text-center p-3 bg-white rounded-lg">
+                <p className="text-2xl font-bold">{resultados?.saludCultivo}</p>
+              </div>
+            </div>
+
+            {/* Card 3: Impacto de Sostenibilidad */}
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 shadow-lg border-2 border-purple-200">
+              <h3 className="text-xl font-bold text-slate-900 mb-4">♻️ Beneficios de Sostenibilidad</h3>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white rounded-xl p-4 text-center border-l-4 border-cyan-400">
+                  <p className="text-xs text-slate-600 mb-1">💧 Ahorro de Agua</p>
+                  <p className="text-2xl font-bold text-cyan-600">{resultados?.ahorroAgua}%</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center border-l-4 border-amber-400">
+                  <p className="text-xs text-slate-600 mb-1">⚡ Ahorro de Energía</p>
+                  <p className="text-2xl font-bold text-amber-600">{resultados?.ahorroEnergia}%</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* === INFORMACIÓN ADICIONAL === */}
+        <div className="mt-12 bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-xl border-2 border-blue-100">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">📊 ¿Cómo Funciona AgroPredict AI?</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: "🛰️",
+                title: "Datos Satelitales",
+                desc: "Recibimos información diaria de satélites para monitorear el estado de tus campos en tiempo real.",
+              },
+              {
+                icon: "🤖",
+                title: "Inteligencia Artificial",
+                desc: "Nuestros modelos ML analizan millones de datos históricos para predicciones precisas.",
+              },
+              {
+                icon: "💡",
+                title: "Recomendaciones",
+                desc: "Obtienes sugerencias optimizadas para maximizar rendimiento y minimizar recursos.",
+              },
+            ].map((item, idx) => (
+              <div key={idx} className="bg-gradient-to-br from-blue-50 to-emerald-50 rounded-xl p-6 border border-blue-100">
+                <p className="text-4xl mb-3">{item.icon}</p>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">{item.title}</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white text-center py-8 relative">
+        <div className="max-w-5xl mx-auto px-6">
+          <p className="text-blue-100 mb-2">
+            🌾 <strong>AgroPredict AI</strong> — Cultivando el Futuro con Inteligencia
+          </p>
+          <p className="text-sm text-blue-200">
+            Parte de la Transición Energética Sostenible | Titikaka Energético 2026
+          </p>
+        </div>
+      </footer>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+      `}</style>
+    </main>
+  );
+}
+
 
 const FeatureGroup = dynamic(
   () => import("react-leaflet").then((m) => m.FeatureGroup),
