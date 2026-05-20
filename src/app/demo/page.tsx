@@ -720,8 +720,8 @@ export default function DemoPage() {
               <div className="rounded-lg bg-white/10 p-4">
                 <p className="text-xs uppercase text-slate-300">Guion de 20 segundos</p>
                 <p className="mt-2 text-sm leading-6">
-                  "Con IA convertimos clima, suelo y energia en una recomendacion simple: ahorrar agua,
-                  bombear con solar y proteger el rendimiento del agricultor puneño."
+                  &quot;Con IA convertimos clima, suelo y energia en una recomendacion simple: ahorrar agua,
+                  bombear con solar y proteger el rendimiento del agricultor puneño.&quot;
                 </p>
               </div>
             </div>

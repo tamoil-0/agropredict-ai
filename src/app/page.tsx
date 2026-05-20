@@ -111,7 +111,7 @@ export default function Home() {
 { value: "40%", label: "Menos Energía", emoji: "⚡" },
 { value: "99%", label: "Precisión", emoji: "🎯" }
 
-            ].map((stat, index) => (
+            ].map((stat) => (
               <div key={stat.label} className="text-center bg-white/60 p-3 rounded-lg backdrop-blur">
                 <div className="text-3xl mb-1">{stat.emoji}</div>
                 <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">

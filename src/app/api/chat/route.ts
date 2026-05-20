@@ -42,7 +42,7 @@ User: ${message}
       "🌱 I don’t have precise information on that right now.";
 
     return NextResponse.json({ reply });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error in /api/chat:", error);
     return NextResponse.json(
       { reply: "⚠️ Internal error while connecting to OpenAI." },
