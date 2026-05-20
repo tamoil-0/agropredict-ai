@@ -1,0 +1,87 @@
+GUION VIDEO 30 SEGUNDOS - AGROPREDICT AI
+
+0-4s | Pantalla Home
+Entra a la pagina principal y di:
+"Esto es AgroPredict AI, una plataforma creada en Puno para llevar inteligencia artificial al campo."
+
+4-9s | Home, seccion de impacto
+Muestra los numeros de ahorro de agua, energia y precision:
+"Queremos que el agricultor tome mejores decisiones: ahorrar agua, reducir energia y proteger su cosecha."
+
+9-13s | Boton Demo
+Haz clic en el demo y di:
+"Ahora veamos como funciona en una parcela real simulada."
+
+13-20s | Demo, panel izquierdo
+Cambia la region, el cultivo y el area. Por ejemplo: Puno, quinua, 2.5 hectareas:
+"Aqui seleccionamos una zona de Puno, el cultivo, la fecha de siembra, el area de la parcela y la tecnologia de riego."
+
+20-26s | Demo, resultados principales
+Muestra la etapa fenologica, GDD y NDVI:
+"Con esos datos, AgroPredict calcula en que etapa esta el cultivo, su avance termico y el vigor de la vegetacion con un indicador tipo satelite."
+
+26-33s | Demo, impacto
+Muestra las tarjetas de agua, energia y carbono:
+"Pero lo mas importante es el impacto: nos dice cuanta agua necesita, cuanta energia se usaria para bombearla y cuanto CO2 podemos evitar usando energia limpia."
+
+33-40s | Demo, recomendacion
+Muestra la caja de recomendacion:
+"Al final, la IA no solo muestra numeros: entrega una decision clara para el agricultor, como regar mejor, reducir riesgo de helada o planificar la cosecha."
+
+40-45s | Cierre
+Mira a camara y di:
+"AgroPredict AI: producir mas, desperdiciar menos y construir un Puno mas sostenible."
+
+
+VERSION MAS IMPACTANTE PARA DECIR SOLO EN EL DEMO
+
+Al entrar al demo:
+"Esta es la parte mas importante: aqui AgroPredict convierte datos en decisiones."
+
+Mientras cambias region y cultivo:
+"No es lo mismo sembrar quinua en Puno que cafe en Sandia. Cada zona tiene altitud, temperatura, lluvia, humedad y radiacion distintas."
+
+Mientras muestras etapa y GDD:
+"El sistema calcula los grados-dia de crecimiento. Eso nos ayuda a saber si el cultivo esta emergiendo, creciendo, floreciendo o acercandose a cosecha."
+
+Mientras muestras NDVI:
+"Este indicador representa el vigor de la vegetacion. En una version real se conecta con satelites o drones para ver la salud del campo."
+
+Mientras muestras agua y energia:
+"Aqui esta la conexion con Titikaka Energetico: si regamos mejor, usamos menos agua; si bombeamos con energia solar, reducimos costos y emisiones."
+
+Mientras muestras recomendacion:
+"Lo que buscamos no es llenar al agricultor de graficos, sino darle una respuesta simple: que hacer hoy para proteger su cultivo y producir mejor."
+
+Cierre fuerte:
+"AgroPredict AI demuestra que la transicion energetica tambien puede empezar en una parcela agricola."
+
+
+GUION PARA INTERPRETAR LOS DATOS QUE SALEN EN EL DEMO
+
+Al entrar al demo y mostrar la pantalla completa:
+"Aqui estamos simulando una parcela real de quinua en Puno, a mas de 3,800 metros de altitud. El sistema toma datos de clima, suelo, radiacion solar, fecha de siembra, tipo de riego y fuente de energia."
+
+Muestra las tarjetas superiores:
+"Lo primero que vemos es el impacto directo: con riego tecnificado y bombeo solar, esta parcela puede reducir aproximadamente 41% de agua y 58% de energia, manteniendo el riesgo controlado. Eso significa producir mejor sin desperdiciar recursos."
+
+Muestra la parcela simulada:
+"La IA interpreta que el cultivo lleva 123 dias de campana. Con la temperatura media de Puno, la radiacion solar y la humedad del suelo, calcula 823 grados-dia acumulados. Eso nos indica que la quinua esta en una etapa critica: panojamiento y floracion."
+
+Muestra la barra de etapa fenologica:
+"Esta etapa es clave, porque aqui se define gran parte del rendimiento. Si falta agua o hay estres por calor o frio, la cosecha puede bajar. Por eso la plataforma no solo muestra datos: avisa cuando actuar."
+
+Muestra el NDVI:
+"El NDVI estimado es 0.61, un vigor medio. En palabras simples: el cultivo esta activo, pero todavia necesita monitoreo. En una version conectada a satelites o drones, este indicador ayudaria a detectar zonas debiles dentro del campo."
+
+Muestra agua, energia y carbono:
+"Aqui se ve el impacto ambiental y economico: la parcela necesita cerca de 3,591 metros cubicos de agua, pero el sistema estima un ahorro de casi 2,500 metros cubicos frente al riego tradicional. Ademas, el bombeo usaria 116 kWh y evitaria 83 kilos de CO2 usando energia solar."
+
+Muestra resultado productivo:
+"El resultado productivo nos da una alerta importante: la salud del cultivo esta en 39% y el rendimiento esperado es de 0.6 toneladas por hectarea. Eso no es un numero para asustar, es una senal temprana para corregir antes de perder la campana."
+
+Muestra recomendacion:
+"Por eso la recomendacion es concreta: programar riego en bloque corto durante la tarde o con bombeo solar. Es decir, la IA convierte todos estos datos en una accion simple para el agricultor."
+
+Cierre para el demo:
+"AgroPredict AI no solo predice cultivos. Ayuda a ahorrar agua, reducir energia, proteger la cosecha y demostrar que la transicion energetica tambien empieza en el campo puneño."
